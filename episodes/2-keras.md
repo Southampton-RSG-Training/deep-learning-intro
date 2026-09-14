@@ -140,7 +140,7 @@ working with, so let us create a visualization.
 #### Pair Plot
 One nice visualization for datasets with relatively few attributes is the Pair Plot.
 This can be created using `sns.pairplot(...)`. It shows a scatterplot of each attribute plotted against each of the other attributes.
-By using the `hue='species'` setting for the pairplot the graphs on the diagonal are layered kernel density estimate plots for the different values of the `species` column.
+By using the `hue='species'` setting for the pairplot the graphs on the diagonal are layered kernel density estimate plots for the different values of the `species` column; essentially, these display multiple smoothed probability curves stacked or overlaid on the same graph to compare the distributions of different groups or categories
 
 ```python
 sns.pairplot(penguins, hue="species")
@@ -284,6 +284,16 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.2, random_state=0, shuffle=True, stratify=target)
 ```
 
+So in terms of what it returns:
+
+- `X_train` refers to input features the model uses to train the model,
+- `X_test` are the input features held back for testing the generated model (so not used in model training)
+- `y_train` refers to the correct answers/labels corresponding to `X_train`
+- `y_test` refers to the correct answers/labels corresponding to `X_test`
+
+Or put another way, the `*_train` variables hold the input data and correct answers used for training,
+whilst `*_test` contain the held back input data and correct answers for testing the generated model.
+
 ::: callout
 ## Importance of using the same train-test split
 By setting `random_state=0` we ensure that everyone has the same train-test split.
@@ -315,13 +325,15 @@ from tensorflow import keras
 For this episode it is useful if everyone gets the same results from their training.
 Keras uses a random number generator at certain points during its execution.
 Therefore we will need to set two random seeds, one for numpy and one for tensorflow:
+
 ```python
-keras.utils.set_random_seed(2)
+keras.utils.set_random_seed(5)
 ```
 
 ::: callout
 ## When to use random seeds?
-We use a random seed here to ensure that we get the same results every time we run this code.
+
+We use a specific random seed here to ensure that we get the same results every time we run this code.
 This makes our results reproducible and allows us to better compare results between different experiments.
 
 Please note that even though you have selected a random seed, this seed is used to generate a
@@ -354,13 +366,14 @@ inputs = keras.Input(shape=(X_train.shape[1],))
 We store a reference to this input class in a variable so we can pass it to the creation of
 our hidden layer.
 Creating the hidden layer can then be done as follows:
+
 ```python
-hidden_layer = keras.layers.Dense(10, activation="relu")(inputs)
+hidden_layer = keras.layers.Dense(40, activation="relu")(inputs)
 ```
 
 The instantiation here has 2 parameters and a seemingly strange combination of parentheses, so
 let us take a closer look.
-The first parameter `10` is the number of neurons we want in this layer, this is one of the
+The first parameter `40` is the number of neurons we want in this layer, this is one of the
 hyperparameters of our system and needs to be chosen carefully. We will get back to this in the section
 on refining the model.
 
@@ -395,11 +408,45 @@ model = keras.Model(inputs=inputs, outputs=output_layer)
 model.summary()
 ```
 
-The model summary here can show you some information about the neural network we have defined.
+```output
+Model: "functional"
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│ input_layer (InputLayer)        │ (None, 4)              │             0 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dense (Dense)                   │ (None, 40)             │           200 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dense_1 (Dense)                 │ (None, 3)              │           123 │
+└─────────────────────────────────┴────────────────────────┴───────────────┘
+
+ Total params: 323 (1.26 KB)
+
+ Trainable params: 323 (1.26 KB)
+
+ Non-trainable params: 0 (0.00 B)
+
+```
+
+The model summary here can show you some information about the structure and size of the neural network we have defined:
+
+- `input_layer (InputLayer`) - each example has 4 input features (but no trainable parameters, since they're inputs)
+- `dense (Dense)` - the hidden layer has 40 neurons, resulting in 200 trainable parameters (since 40 x 4 = weights from the previous `input_layer`, plus 40 biases since each neuron has a bias)
+- `dense_1 (Dense)` - the final layer contains 3 outputs, one for each penguin species. Since it's connected to the 40 neurons from the previous layer, we have 40 x 3 = 120 weights, plus 3 biases)
+
+Hence, 323 trainable parameters.
+
+Note that the output shape always contains `None` as the first entry of the tuple.
+This is a *flexible* dimension which is used by the model when processing several samples at the same time,
+what is usually called a `batch`.
+You will learn more about batching in the next lesson.
+
 
 ::: callout
 ## Trainable and non-trainable parameters
-Keras distinguishes between two types of weights, namely:
+
+Note that Keras distinguishes between two types of weights, namely:
 
 - trainable parameters: these are weights of the neurons that are modified when we train the model in order to minimize our loss function (we will learn about loss functions shortly!).
 
@@ -416,94 +463,17 @@ You could choose to show and discuss the resulting visualization to the learners
 
 
 :::: challenge
-## Create the neural network
+## Changing the size of the model
+
 With the code snippets above, we defined a Keras model with 1 hidden layer with
-10 neurons and an output layer with 3 neurons.
+40 neurons and an output layer with 3 neurons.
 
-1. How many parameters does the resulting model have?
-2. What happens to the number of parameters if we increase or decrease the number of neurons
- in the hidden layer?
+What happens to the number of parameters if we increase or decrease the number of neurons
+in the hidden layer?
 
-#### (optional) Visualizing the model
-Optionally, you can also visualize the same information as `model.summary()` in graph form.
-This step requires the command-line tool `dot` from Graphviz installed, you installed it by following the setup instructions.
-You can check that the installation was successful by executing `dot -V` in the command line. You should get something
-as follows:
-
-```sh
-$ dot -V
-dot - graphviz version 2.43.0 (0)
-```
-
-3. (optional) Provided you have `dot` installed, execute the `plot_model` function
-   as shown below.
-
-```python
-keras.utils.plot_model(
-    model,
-    show_shapes=True,
-    show_layer_names=True,
-    show_layer_activations=True,
-    show_trainable=True
-)
-```
-
-#### (optional) Keras Sequential vs Functional API
-So far we have used the [Functional API](https://keras.io/guides/functional_api/) of Keras.
-You can also implement neural networks using [the Sequential model](https://keras.io/guides/sequential_model/).
-As you can read in the documentation, the Sequential model is appropriate for **a plain stack of layers**
-where each layer has **exactly one input tensor and one output tensor**.
-
-4. (optional) Use the Sequential model to implement the same network
 
 ::: solution
 ## Solution
-Have a look at the output of `model.summary()`:
-```python
-model.summary()
-```
-
-```output
-Model: "functional"
-
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
-┃ Layer (type)               ┃ Output Shape   ┃    Param # ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
-│ input_layer (InputLayer)   │ (None, 4)      │          0 │
-├────────────────────────────┼────────────────┼────────────┤
-│ dense (Dense)              │ (None, 10)     │         50 │
-├────────────────────────────┼────────────────┼────────────┤
-│ dense_1 (Dense)            │ (None, 3)      │         33 │
-└────────────────────────────┴────────────────┴────────────┘
-
- Total params: 83 (332.00 B)
-
- Trainable params: 83 (332.00 B)
-
- Non-trainable params: 0 (0.00 B)
-
-```
-The model has 83 trainable parameters. Each of the 10 neurons in the in the `dense` hidden layer is connected to each of 
-the 4 inputs in the input layer resulting in 40 weights that can be trained. The 10 neurons in the hidden layer are also 
-connected to each of the 3 outputs in the `dense_1` output layer, resulting in a further 30 weights that can be trained. 
-By default `Dense` layers in Keras also contain 1 bias term for each neuron, resulting in a further 10 bias values for the
-hidden layer and 3 bias terms for the output layer. `40+30+10+3=83` trainable parameters.
-
-Note that the output shape always contains `None` as the first entry of the tuple. This is a *flexible* dimension which is used by the model when processing several samples at the same time, what is usually called a `batch`. You will learn more about batching in lesson 3.
-
-The value `(332.00 B)` next to it describes the memory footprint for model weights and this depends on their data type.
-Take a look at what `model.dtype` is.
-
-```python
-print(model.dtype)
-```
-
-```output
-float32
-```
-The model weights are represented using `float32` data type, which consumes 32 bits or 4 bytes for each weight.
-We have 83 parameters, and therefore in total, the model requires `83*4=332` bytes of memory to load
-into the computer's memory.
 
 If you increase the number of neurons in the hidden layer the number of
 trainable parameters in both the hidden and output layer increases or
@@ -511,27 +481,6 @@ decreases in accordance with the number of neurons added.
 Each extra neuron has 4 weights connected to the input layer, 1 bias term, and 3 weights connected to the output layer.
 So in total 8 extra parameters.
 
-*The name in quotes within the string `Model: "functional"` may be different in your view; this detail is not important.*
-
-#### (optional) Visualizing the model
-3. Upon executing the `plot_model` function, you should see the following image.
-
-![Output of *keras.utils.plot_model()* function][plot-model]
-
-
-#### (optional) Keras Sequential vs Functional API
-4. This implements the same model using the Sequential API:
-```python
-model = keras.Sequential(
-    [
-        keras.Input(shape=(X_train.shape[1],)),
-        keras.layers.Dense(10, activation="relu"),
-        keras.layers.Dense(3, activation="softmax"),
-    ]
-)
-```
-
-We will use the Functional API for the remainder of this course, since it is more flexible and more explicit.
 :::
 ::::
 
@@ -615,9 +564,13 @@ sns.lineplot(x=history.epoch, y=history.history['loss'])
 ::: callout
 ## I get a different plot
 It could be that you get a different plot than the one shown here.
-This could be because of a different random initialization of the model or a different split of the data.
-This difference can be avoided by setting `random_state` and random seed in the same way like we discussed
+This could be because of a different random initialization of the model, or a different split of the data.
+This difference can be avoided to a great extent by setting `random_state` and random seed in the same way like we discussed
 in [When to use random seeds?](#when-to-use-random-seeds).
+
+However, while a random seed ensures that pseudo-random operations (like weight initializations and data shuffling) start from the same baseline, it cannot fix architectural and mathematical changes between TensorFlow versions,
+how underlying differences in how GPUs are configured to trade precision for speed,
+or how different CPU architectures perform operations in a different order.
 :::
 
 This plot can be used to identify whether the training is well configured or whether there
@@ -632,12 +585,6 @@ Looking at the training curve we have just made.
    * Does it change quickly or slowly?
    * Does the graph look very jittery?
 2. Do you think the resulting trained network will work well on the test set?
-
-When the training process does not go well:
-
-3. (optional) Something went wrong here during training. What could be the problem, and how do you see that in the training curve?
-Also compare the range on the y-axis with the previous training curve.
-![][bad-training-curve]
 
 ::: solution
 ## Solution
@@ -662,6 +609,22 @@ We will take a closer look at training curves in the next episode. Some of the c
 :::
 ::::
 
+In general, when a training process does not go well, it might end up looking like the following:
+
+![][bad-training-curve]
+
+The loss does not go down at all, or only very slightly. This means that the model is not learning anything.
+
+It could be that something went wrong in the data preparation (for example the labels are not attached to the right features). In addition, the graph is very jittery.
+This means that for every update step, the weights in the network are updated in such a way that the loss sometimes increases a lot and sometimes decreases a lot.
+
+This could indicate that the weights are updated too much at every learning step and you need a smaller learning rate (we will go into more details on this in the next episode).
+Or, perhaps there is a high variation in the data, leading the optimizer to change the weights in different directions at every learning step.
+This could be addressed by presenting more data at every learning step (or in other words increasing the batch size).
+
+In this case the graph was created by training on nonsense data, so this a training curve for a problem where nothing can be learned really.
+
+
 ## 7. Perform a prediction/classification
 Now that we have a trained neural network, we can use it to predict new samples
 of penguin using the `predict` function.
@@ -677,20 +640,20 @@ y_pred = model.predict(X_test)
 prediction = pd.DataFrame(y_pred, columns=target.columns)
 prediction
 ```
-|     |          |           |          |
-| --: | -------: | --------: | -------: |
-| 0   | 0.304484 | 0.192893  | 0.502623 |
-| 1   | 0.527107 | 0.095888  | 0.377005 |
-| 2   | 0.373989 | 0.195604  | 0.430406 |
-| 3   | 0.493643 | 0.154104  | 0.352253 |
-| 4   | 0.309051 | 0.308646  | 0.382303 |
-| ... | ...      | ...       | ...      |
-| 64  | 0.406074 | 0.191430  | 0.402496 |
-| 65  | 0.645621 | 0.077174  | 0.277204 |
-| 66  | 0.356284 | 0.185958  | 0.457758 |
-| 67  | 0.393868 | 0.159575  | 0.446557 |
-| 68  | 0.509837 | 0.144219  | 0.345943 |
 
+|     | Adelie   | Chinstrap    | Gentoo   |
+| --: | -------: | -----------: | -------: |
+|0    | 0.278820 | 3.604682e-06 | 0.721176 |
+|1    | 0.952101 | 9.821843e-04 | 0.046916 |
+|2    | 0.788743 | 1.073092e-04 | 0.211150 |
+|3    | 0.214119 | 8.166643e-05 | 0.785800 |
+|4    | 0.994257 | 2.007967e-04 | 0.005542 |
+|...  | ... 	 | ... 	        | ...      |
+|64   | 0.867523 | 1.316707e-01 | 0.000806 |
+|65   | 0.898732 | 9.433695e-02 | 0.006931 |
+|66   | 0.996441 | 2.592951e-03 | 0.000966 |
+|67   | 0.127181 | 3.365880e-06 | 0.872815 |
+|68   | 0.004885 | 4.035670e-09 | 0.995115 |
 
 Remember that the output of the network uses the `softmax` activation function and has three
 outputs, one for each species. This dataframe shows this nicely.
@@ -708,15 +671,15 @@ predicted_species
 ```output
 0     Gentoo
 1     Adelie
-2     Gentoo
-3     Adelie
-4     Gentoo
-      ...
+2     Adelie
+3     Gentoo
+4     Adelie
+       ...  
 64    Adelie
 65    Adelie
-66    Gentoo
+66    Adelie
 67    Gentoo
-68    Adelie
+68    Gentoo
 Length: 69, dtype: object
 ```
 
@@ -754,9 +717,9 @@ matrix = confusion_matrix(true_species, predicted_species)
 print(matrix)
 ```
 ```output
-[[22  0  8]
- [ 5  0  9]
- [ 6  0 19]]
+[[29  0  1]
+ [14  0  0]
+ [ 1  0 24]]
 ```
 
 Unfortunately, this matrix is not immediately understandable. Its not clear which column and which row corresponds to which species.
@@ -784,9 +747,9 @@ sns.heatmap(confusion_df, annot=True, cmap='Blues')
 
 Here are more explanations of this confusion matrix and the classification model.
 
-- The first row: There are 30 Adelie penguins in the test data, with 22 identified as Adelie (valid), 8 being identified as Gentoo (invalid), and no Adelie is identified as Chinstrap.
-- The second row: There are 14 Chinstrap pengunis in the test data, with 5 identified as Adelie (invalid), none are correctly recognized as Chinstrap, and 9 Chinstraps are identified as Gentoo (invalid).
-- The third row: There are 25 Gentoo penguins in the test data, with 6 identified as Adelie (invalid), none being recognized as Chinstrap (invalid), and 19 Gentoos are identified as Gentoo (valid).
+- The first row: There are 30 Adelie penguins in the test data, with 29 identified as Adelie (valid), and 1 being identified as Gentoo (invalid), and no Adelie is identified as Chinstrap.
+- The second row: There are 14 Chinstrap penguins in the test data, with 14 identified as Adelie (invalid), none are correctly recognized as Chinstrap, and no Chinstraps are identified as Gentoo.
+- The third row: There are 25 Gentoo penguins in the test data, with 1 identified as Adelie (invalid), none being recognized as Chinstrap (invalid), and 124 Gentoos are identified as Gentoo (valid).
 
 :::: challenge
 ## Confusion Matrix
@@ -799,7 +762,7 @@ visualize a confusion matrix.
 
 ::: solution
 ## Solution
-The confusion matrix shows that the predictions for Adelie and Gentoo are decent, but could be improved. However, Chinstrap is not predicted ever.
+The confusion matrix shows that the predictions for Adelie and Gentoo are decent, but could be improved a bit. However, Chinstrap is not predicted correctly ever.
 
 If we go back to the [**Pair Plot**](#pair-plot) in the Visualization section above, we can figure out that the biggest challenge is distinguishing the Chinstrap penguins from the marginal distributions of the four features (bill length, bill depth, flipper length, and body mass). That means that there is no single variable that separates Chinstrap penguins from all other species. Only the combination of bill length and bill depth gives a good separation of Chinstrap from Adelie and Gentoo penguins.
 
@@ -843,6 +806,29 @@ pretrained_model = keras.models.load_model('my_first_model.keras')
 This loaded model can be used as before to predict.
 
 ```python
+import seaborn as sns
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from tensorflow import keras
+
+# Prepare the data in exactly the same way as during training
+penguins = sns.load_dataset("penguins")
+
+penguins_filtered = penguins.drop(columns=["island", "sex"])
+penguins_filtered = penguins_filtered.dropna()
+
+features = penguins_filtered.drop(columns=["species"])
+target = pd.get_dummies(penguins_filtered["species"])
+
+X_train, X_test, y_train, y_test = train_test_split(
+    features,
+    target,
+    test_size=0.2,
+    random_state=0,
+    shuffle=True,
+    stratify=target
+)
+
 # use the pretrained model here
 y_pretrained_pred = pretrained_model.predict(X_test)
 pretrained_prediction = pd.DataFrame(y_pretrained_pred, columns=target.columns.values)
@@ -867,6 +853,8 @@ print(pretrained_predicted_species)
 Length: 69, dtype: object
 ```
 
+Unsurprisingly, this is much faster!
+
 
 [palmer-penguins]: fig/palmer_penguins.png "Palmer Penguins"
 {alt='Illustration of the three species of penguins found in the Palmer Archipelago, Antarctica: Chinstrap, Gentoo and Adele'}
@@ -889,7 +877,7 @@ Length: 69, dtype: object
 [bad-training-curve]: fig/02_bad_training_history_1.png "Training Curve Gone Wrong"
 {alt='Very jittery training curve with the loss value jumping back and forth between 2 and 4. The range of the y-axis is from 2 to 4, whereas in the previous training curve it was from 0 to 2. The loss seems to decrease a litle bit, but not as much as compared to the previous plot where it dropped to almost 0. The minimum loss in the end is somewhere around 2.'}
 
-[confusion_matrix]: fig/confusion_matrix.png "Confusion Matrix"
+[confusion_matrix]: fig/02_confusion_matrix.png "Confusion Matrix"
 {alt='Confusion matrix of the test set with high accuracy for Adelie and Gentoo classification and no correctly predicted Chinstrap'}
 
 
