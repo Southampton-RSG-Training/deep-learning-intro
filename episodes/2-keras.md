@@ -806,6 +806,11 @@ pretrained_model = keras.models.load_model('my_first_model.keras')
 This loaded model can be used as before to predict.
 
 ```python
+import seaborn as sns
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from tensorflow import keras
+
 # Prepare the data in exactly the same way as during training
 penguins = sns.load_dataset("penguins")
 
