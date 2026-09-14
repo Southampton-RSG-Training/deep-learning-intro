@@ -230,9 +230,16 @@ Again, there are many ways to do this. We will be using the one-hot encoding.
 This encoding creates multiple columns, as many as there are unique values, and
 puts a 1 in the column with the corresponding correct class, and 0's in
 the other columns.
-For instance, for a penguin of the Adelie species the one-hot encoding would be 1 0 0.
+For instance, for a penguin of each of the following species, the one-hot encodings would be:
+
+| Adelie | Chinstrap | Gentoo |
+| -----: | --------: | -----: |
+| 1      | 0         | 0      |
+| 0      | 1         | 0      |
+| 0      | 0         | 1      |
 
 Fortunately, Pandas is able to generate this encoding for us.
+
 ```python
 import pandas as pd
 
