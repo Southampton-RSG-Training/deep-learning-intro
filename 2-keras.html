@@ -591,7 +591,7 @@ of features distinguishes the two sexes best?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ul><li>The plots show that the green class, Gentoo is somewhat more easily
 distinguishable from the other two.</li>
@@ -684,9 +684,21 @@ to transform this column into a numerical format first. Again, there are
 many ways to do this. We will be using the one-hot encoding. This
 encoding creates multiple columns, as many as there are unique values,
 and puts a 1 in the column with the corresponding correct class, and 0’s
-in the other columns. For instance, for a penguin of the Adelie species
-the one-hot encoding would be 1 0 0.</p>
-<p>Fortunately, Pandas is able to generate this encoding for us.</p>
+in the other columns. For instance, for a penguin of each of the
+following species, the one-hot encodings would be:</p>
+<table class="table"><thead><tr><th align="right">Adelie</th>
+<th align="right">Chinstrap</th>
+<th align="right">Gentoo</th>
+</tr></thead><tbody><tr><td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr><tr><td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr><tr><td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr></tbody></table><p>Fortunately, Pandas is able to generate this encoding for us.</p>
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -716,7 +728,7 @@ encoded the target class?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>C: 3, one for each output variable class</p>
 </div>
@@ -1016,7 +1028,7 @@ the number of neurons in the hidden layer?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>If you increase the number of neurons in the hidden layer the number
 of trainable parameters in both the hidden and output layer increases or
@@ -1166,7 +1178,7 @@ test set?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>The training loss decreases quickly. It drops in a smooth line with
 little jitter. This is ideal for a training curve.</li>
@@ -1404,7 +1416,7 @@ visualize a confusion matrix.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>The confusion matrix shows that the predictions for Adelie and Gentoo
 are decent, but could be improved a bit. However, Chinstrap is not
