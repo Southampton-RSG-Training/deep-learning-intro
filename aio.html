@@ -4326,7 +4326,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-4-advanced-layer-types"><p>Content from <a href="4-advanced-layer-types.html">Advanced layer types</a></p>
 <hr>
-<p>Last updated on 2025-09-03 |
+<p>Last updated on 2026-09-16 |
 
         <a href="https://github.com/Southampton-RSG-Training/deep-learning-intro/edit/main/episodes/4-advanced-layer-types.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -4398,13 +4398,17 @@ original dataset</a> that can be used for multiclass classification with
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="im">import</span> pathlib</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1" aria-label="code-block-1-4"></a>DATA_FOLDER <span class="op">=</span> pathlib.Path(<span class="st">'data/dataset_dollarstreet/'</span>) <span class="co"># change to location where you stored the data</span></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1" aria-label="code-block-1-5"></a>train_images <span class="op">=</span> np.load(DATA_FOLDER <span class="op">/</span> <span class="st">'train_images.npy'</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1" aria-label="code-block-1-6"></a>val_images <span class="op">=</span> np.load(DATA_FOLDER <span class="op">/</span> <span class="st">'test_images.npy'</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1" aria-label="code-block-1-7"></a>train_labels <span class="op">=</span> np.load(DATA_FOLDER <span class="op">/</span> <span class="st">'train_labels.npy'</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1" aria-label="code-block-1-8"></a>val_labels <span class="op">=</span> np.load(DATA_FOLDER <span class="op">/</span> <span class="st">'test_labels.npy'</span>)</span></code></pre>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a><span class="im">import</span> keras</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1" aria-label="code-block-1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1" aria-label="code-block-1-5"></a>DATA_FOLDER <span class="op">=</span> pathlib.Path(<span class="st">'data/dataset_dollarstreet/'</span>) <span class="co"># change to location where you stored the data</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1" aria-label="code-block-1-6"></a>train_images <span class="op">=</span> np.load(DATA_FOLDER <span class="op">/</span> <span class="st">'train_images.npy'</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1" aria-label="code-block-1-7"></a>val_images <span class="op">=</span> np.load(DATA_FOLDER <span class="op">/</span> <span class="st">'test_images.npy'</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1" aria-label="code-block-1-8"></a>train_labels <span class="op">=</span> np.load(DATA_FOLDER <span class="op">/</span> <span class="st">'train_labels.npy'</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1" aria-label="code-block-1-9"></a>val_labels <span class="op">=</span> np.load(DATA_FOLDER <span class="op">/</span> <span class="st">'test_labels.npy'</span>)</span></code></pre>
 </div>
+<p>Note that here, the training and validation data have already been
+split into separate datasets, so we don’t need to use
+<code>train_test_split()</code> as we have before.</p>
 <div id="a-note-about-data-provenance" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -4413,8 +4417,8 @@ original dataset</a> that can be used for multiclass classification with
 <div id="a-note-about-data-provenance" class="callout-inner">
 <h3 class="callout-title">A note about data provenance</h3>
 <div class="callout-content">
-<p>In an earlier version, this part of the lesson used a different
-example dataset. During <a href="https://github.com/carpentries-lab/reviews/issues/25#issuecomment-1953271802" class="external-link">peer
+<p>In an earlier version of this lesson, this part of the lesson used a
+different example dataset. During <a href="https://github.com/carpentries-lab/reviews/issues/25#issuecomment-1953271802" class="external-link">peer
 review</a>, the decision was made to replace that dataset due to the way
 it had been compiled using images “scraped” from the internet without
 permission from or credit to the original creators of those images.
@@ -4595,6 +4599,17 @@ small input values. So we normalize our data between <code>0</code> and
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1" aria-label="code-block-10-1"></a>train_images <span class="op">=</span> train_images <span class="op">/</span> <span class="fl">255.0</span></span>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1" aria-label="code-block-10-2"></a>val_images <span class="op">=</span> val_images <span class="op">/</span> <span class="fl">255.0</span></span></code></pre>
 </div>
+<p>So this <code>/ 255.0</code> operation is applied across every
+individual value in <code>train_images</code> and
+<code>val_images</code>.</p>
+<p>As we saw with BatchNormalisation in episode 3, standardising our
+data (or normalising it in this case) is good practice. Since if we’re
+training a classifier on features that differ greatly, such as
+temperature and cm of rain, our classifier has to learn that
+temperatures have a much wider range than cm of rain. This means it has
+to in some way learn to normalise the values itself, slowing the
+learning process. Normalising or standardising the data beforehand
+reduces this extra overhead.</p>
 </section><section><h2 class="section-heading" id="choose-a-pretrained-model-or-start-building-architecture-from-scratch">4. Choose a pretrained model or start building architecture from
 scratch<a class="anchor" aria-label="anchor" href="#choose-a-pretrained-model-or-start-building-architecture-from-scratch"></a>
 </h2>
@@ -4835,6 +4850,35 @@ convolutional layer to the outputs for our classes.</p>
 <span id="cb16-11"><a href="#cb16-11" tabindex="-1" aria-label="code-block-16-11"></a></span>
 <span id="cb16-12"><a href="#cb16-12" tabindex="-1" aria-label="code-block-16-12"></a>model.summary()</span></code></pre>
 </div>
+<p>Note that:</p>
+<ul>
+<li>In <code>input = keras.Input(...)</code> note the shape here is
+64x64x3: it’s multidimensional, as opposed to just the 4 features we had
+in the penguins dataset.</li>
+<li>With <code>conv2d(50, ...)</code>, the 50 represents the number of
+kernels that the convolutional layer learns. To start with, these
+kernals are randomised, but over time, they emerge as learned features,
+like edges, corners, etc.</li>
+</ul>
+<p>Importantly, also note the structure of the layers here, particularly
+that the second convolution layer operates on the output of the first,
+not directly on the original image.</p>
+<ul>
+<li>The first layer learns relatively simple features from the pixels,
+which might be edges, changes in colour/intensity, simple lines and
+textures. It produces 50 feature maps, because it has 50 filters.</li>
+<li>The second layer then examines those 50 feature maps. It can
+therefore learn combinations of the simpler features found by the first
+layer. For example, combinations of edges might indicate corners, curves
+or parts of objects.</li>
+<li>So we’re progressively building up more complex representations of
+the image. Early layers tend to detect relatively simple features, while
+later layers can combine these into more complex patterns that may
+correspond to shapes or parts of objects</li>
+<li>Finally, we use those features to produce 10 output scores, one for
+each class. As before, we can take the class with the highest score as
+the model’s predicted class.</li>
+</ul>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -4860,13 +4904,13 @@ convolutional layer to the outputs for our classes.</p>
 
  Non-trainable params: 0 (0.00 B)</code></pre>
 </div>
-<div id="convolutional-neural-network" class="callout challenge">
+<div id="understanding-the-model" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <span class="callout-header">Challenge</span>
-<div id="convolutional-neural-network" class="callout-inner">
-<h3 class="callout-title">Convolutional Neural Network</h3>
+<div id="understanding-the-model" class="callout-inner">
+<h3 class="callout-title">Understanding the Model</h3>
 <div class="callout-content">
 <p>Inspect the network above:</p>
 <ul>
@@ -6149,7 +6193,7 @@ as argument for <code>DenseNet121()</code>?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Solutions </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="section level3">
 <h3 id="trainable-parameters-1">1. Trainable parameters<a class="anchor" aria-label="anchor" href="#trainable-parameters-1"></a>
@@ -6230,7 +6274,7 @@ to DenseNet121?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="section level3">
 <h3 id="compile-the-model-1">1. Compile the model<a class="anchor" aria-label="anchor" href="#compile-the-model-1"></a>
@@ -6433,7 +6477,7 @@ spectral embedding layer drastically, to for example 5 neurons?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>The model summary for the Siamese model is more complex than what we
@@ -6750,8 +6794,8 @@ any links that you are not going to use.
   "url": "https://Southampton-RSG-Training.github.io/deep-learning-intro/aio.html",
   "identifier": "https://Southampton-RSG-Training.github.io/deep-learning-intro/aio.html",
   "dateCreated": "2020-10-17",
-  "dateModified": "2026-09-15",
-  "datePublished": "2026-09-15"
+  "dateModified": "2026-09-16",
+  "datePublished": "2026-09-16"
 }
 
   </script><script>
