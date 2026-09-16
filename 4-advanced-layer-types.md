@@ -34,6 +34,7 @@ The [MLCommons Dollar Street Dataset](https://www.kaggle.com/datasets/mlcommons/
 ```python
 import pathlib
 import numpy as np
+import keras
 
 DATA_FOLDER = pathlib.Path('data/dataset_dollarstreet/') # change to location where you stored the data
 train_images = np.load(DATA_FOLDER / 'train_images.npy')
@@ -42,10 +43,13 @@ train_labels = np.load(DATA_FOLDER / 'train_labels.npy')
 val_labels = np.load(DATA_FOLDER / 'test_labels.npy')
 ```
 
+Note that here, the training and validation data have already been split into separate datasets,
+so we don't need to use `train_test_split()` as we have before.
+
 :::::::::::::::::::::::::::::::::::::::::: callout
 
 ### A note about data provenance
-In an earlier version, this part of the lesson used a different example dataset.
+In an earlier version of this lesson, this part of the lesson used a different example dataset.
 During [peer review](https://github.com/carpentries-lab/reviews/issues/25#issuecomment-1953271802), the decision was made to replace that dataset due to the way it had been compiled using images "scraped" from the internet without permission from or credit to the original creators of those images. Unfortunately, uncredited use of images is a common problem among datasets used to benchmark models for image classification.
 
 The Dollar Street dataset was chosen for use in the lesson as it contains only images [created by the Gapminder project](https://www.gapminder.org/dollar-street/about?) for the purposes of using them in the dataset.
@@ -148,6 +152,7 @@ train_labels.min(), train_labels.max()
 
 The values of the labels range between `0` and `9`, denoting 10 different classes.
 
+
 ## 3. Prepare data
 
 The training set consists of 878 images of `64x64` pixels and 3 channels (RGB values). The RGB values are between `0` and `255`. For input of neural networks, it is better to have small input values. So we normalize our data between `0` and `1`:
@@ -157,6 +162,15 @@ The training set consists of 878 images of `64x64` pixels and 3 channels (RGB va
 train_images = train_images / 255.0
 val_images = val_images / 255.0
 ```
+
+So this `/ 255.0` operation is applied across every individual value in `train_images` and `val_images`.
+
+As we saw with BatchNormalisation in episode 3, standardising our data (or normalising it in this case) is good practice.
+Since if we're training a classifier on features that differ greatly, such as temperature and cm of rain,
+our classifier has to learn that temperatures have a much wider range than cm of rain.
+This means it has to in some way learn to normalise the values itself, slowing the learning process.
+Normalising or standardising the data beforehand reduces this extra overhead.
+
 
 ## 4. Choose a pretrained model or start building architecture from scratch
 
@@ -292,6 +306,19 @@ model = keras.Model(inputs=inputs, outputs=outputs, name="dollar_street_model_sm
 model.summary()
 ```
 
+Note that:
+
+- In `input = keras.Input(...)` note the shape here is 64x64x3: it's multidimensional, as opposed to just the 4 features we had in the penguins dataset.
+- With `conv2d(50, ...)`, the 50 represents the number of kernels that the convolutional layer learns. To start with, these kernals are randomised, but over time, they emerge as learned features, like edges, corners, etc.
+
+Importantly, also note the structure of the layers here,
+particularly that the second convolution layer operates on the output of the first, not directly on the original image.
+
+- The first layer learns relatively simple features from the pixels, which might be edges, changes in colour/intensity, simple lines and textures. It produces 50 feature maps, because it has 50 filters.
+- The second layer then examines those 50 feature maps. It can therefore learn combinations of the simpler features found by the first layer. For example, combinations of edges might indicate corners, curves or parts of objects.
+- So we're progressively building up more complex representations of the image. Early layers tend to detect relatively simple features, while later layers can combine these into more complex patterns that may correspond to shapes or parts of objects
+- Finally, we use those features to produce 10 output scores, one for each class. As before, we can take the class with the highest score as the model's predicted class.
+
 ```output
 Model: "dollar_street_model_small"
 
@@ -317,7 +344,7 @@ Model: "dollar_street_model_small"
 ```
 
 :::: challenge
-## Convolutional Neural Network
+## Understanding the Model
 
 Inspect the network above:
 
