@@ -1,7 +1,7 @@
 ---
 title: "Classification by a neural network using Keras"
-teaching: 60
-exercises: 50
+teaching: 80
+exercises: 30
 ---
 
 ::: questions
@@ -158,6 +158,8 @@ sns.pairplot(penguins, hue="species")
 
 ## Pairplot
 
+5 mins.
+
 Take a look at the pairplot we created. Consider the following questions:
 
 * Is there any class that is easily distinguishable from the others?
@@ -254,7 +256,10 @@ target.head() # print out the top 5 to see what it looks like.
 ```
 
 :::: challenge
-## One-hot encoding
+## Class exercise: One-hot encoding
+
+5 mins.
+
 How many output neurons will our network have now that we one-hot encoded the target class?
 
 * A: 1
@@ -476,7 +481,9 @@ You could choose to show and discuss the resulting visualization to the learners
 
 
 :::: challenge
-## Changing the size of the model
+## Class exercise: Changing the size of the model
+
+5 mins.
 
 With the code snippets above, we defined a Keras model with 1 hidden layer with
 40 neurons and an output layer with 3 neurons.
@@ -590,7 +597,10 @@ This plot can be used to identify whether the training is well configured or whe
 are problems that need to be addressed.
 
 :::: challenge
-## The Training Curve
+## Class exercise: The Training Curve
+
+5 mins.
+
 Looking at the training curve we have just made.
 
 1. How does the training progress?
@@ -766,6 +776,9 @@ Here are more explanations of this confusion matrix and the classification model
 
 :::: challenge
 ## Confusion Matrix
+
+10 mins.
+
 Measure the performance of the neural network you trained and
 visualize a confusion matrix.
 

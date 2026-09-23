@@ -1,7 +1,7 @@
 ---
 title: "Advanced layer types"
-teaching: 70
-exercises: 70
+teaching: 80
+exercises: 60
 ---
 
 ::: questions
@@ -106,7 +106,9 @@ and stands for the three color channels **R**ed, **G**reen, **B**lue.
 
 :::: challenge
 
-### Number of features in Dollar Street 10
+### Class exercise: Number of features in Dollar Street 10
+
+5 mins.
 
 How many features does one image in the Dollar Street 10 dataset have?
 
@@ -180,7 +182,10 @@ This results in many connections, and thus many weights to be learned, in the ne
 Note that our input dimension is now quite high (even with small pictures of `64x64` pixels): we have 12288 features.
 
 :::: challenge
-## Number of parameters{#parameters-exercise-1}
+## Class exercise: Number of parameters{#parameters-exercise-1}
+
+5 mins.
+
 Suppose we create a single Dense (fully connected) layer with 100 hidden units that connect to the input pixels, how many parameters does this layer have?
 
 - A. 1228800
@@ -263,8 +268,11 @@ there that enable users to interactively play around with images and convolution
 :::
 
 :::: challenge
-## Border pixels
-What, do you think, happens to the border pixels when applying a convolution?
+## Class exercise: Border pixels
+
+5 mins.
+
+What do you think happens to the border pixels when applying a convolution?
 
 ::: solution
 ## Solution
@@ -280,7 +288,10 @@ in the context of applying a _Gaussian blur_.
 ::::
 
 :::: challenge
-## Number of model parameters{#parameters-exercise-3}
+## Class Exercise: Number of model parameters{#parameters-exercise-3}
+
+5 mins.
+
 Suppose we apply a convolutional layer with 100 kernels of size 3 * 3 * 3 (the last dimension applies to the rgb channels) to our images of 64 * 64 * 3 pixels. How many parameters do we have? Assume, for simplicity, that the kernels do not use bias terms. Compare this to the answer of the earlier exercise, ["Number of Parameters"](#parameters-exercise-1).
 
 ::: solution
@@ -344,7 +355,9 @@ Model: "dollar_street_model_small"
 ```
 
 :::: challenge
-## Understanding the Model
+## Class exercise: Understanding the Model
+
+5 mins.
 
 Inspect the network above:
 
@@ -625,7 +638,10 @@ This demonstrates that convolutional layers are a big improvement over dense lay
 
 :::: challenge
 ## Network depth
-What, do you think, will be the effect of adding a convolutional layer to your model? Will this model have more or fewer parameters?
+
+15 mins.
+
+What do you think will be the effect of adding a convolutional layer to your model? Will this model have more or fewer parameters?
 Try it out. Create a `model` that has an additional `Conv2d` layer with 50 filters and another MaxPooling2D layer after the last MaxPooling2D layer. Train it for 10 epochs and plot the results.
 
 **HINT**:
@@ -731,7 +747,10 @@ audio data for speech recognition, or 3d structures of chemical compounds.
 :::
 
 :::: challenge
-## Why and when to use convolutional neural networks
+## Class exercise: Why and when to use convolutional neural networks
+
+5 mins.
+
 1. Would it make sense to train a convolutional neural network (CNN) on the penguins dataset and why?
 2. Would it make sense to train a CNN on the weather dataset and why?
 3. (Optional) Can you think of a different machine learning task that would benefit from a
@@ -862,6 +881,9 @@ Now we see that the gap between the training accuracy and validation accuracy is
 
 :::: challenge
 ## Vary dropout rate
+
+10 mins.
+
 1. What do you think would happen if you lower the dropout rate? Try it out, and
   see how it affects the model training.
 2. You are varying the dropout rate and checking its effect on the model performance,
@@ -1037,7 +1059,9 @@ Score: 2.143627882003784
 
 :::: challenge
 
-## Hyperparameter tuning
+## Class exercise: Hyperparameter tuning
+
+5 mins.
 
 1: Looking at the grid search results, select all correct statements:
 
