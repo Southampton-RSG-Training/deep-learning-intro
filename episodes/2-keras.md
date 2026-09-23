@@ -68,6 +68,12 @@ Using a GPU becomes necessary when tackling larger datasets or complex problems 
 require a more complex neural network.
 :::
 
+::: instructor
+## Add workflow step description and number to notebook
+As you proceed through each of the workflow steps, add markdown cells at the start of each stage of the workflow to remind and demarcate where learners are in the overall process. e.g. "1. Formulate/outline the problem: penguin classification"
+:::
+
+
 ## 1. Formulate/outline the problem: penguin classification
 In this episode we will be using the [penguin dataset](https://zenodo.org/record/3960218). This is a dataset that was published in 2020 by Allison Horst and contains data on three different species of the penguins.
 
