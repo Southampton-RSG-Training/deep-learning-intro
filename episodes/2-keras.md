@@ -821,7 +821,8 @@ and typically we'd take more careful consideration when selecting them.
 We will go into more depth of hyperparameter choices in later episodes,
 but take some time to explore what happens if you change them.
 
-- Look at changing the number of neurons in the dense layer, and the number of epochs
+- Experiment with changing the hyperparameters (e.g. the number of neurons in the dense layer, and the number of epochs),
+and perhaps adding a new `Dense` layer
 - Can you attain a more performant model?
 - Are your findings consistent when you change the random seed?
 
