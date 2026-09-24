@@ -354,6 +354,17 @@ Model: "dollar_street_model_small"
  Non-trainable params: 0 (0.00 B)
 ```
 
+### Understanding Conv2D layer outputs
+
+So taking our understanding of how Conv2D layers work, our model, and the summary above,
+the outputs from the first three layers are:
+
+- `input_layer_1 (InputLayer)` - our original size `64 * 64 * 3` images
+- `conv2d (Conv2D)` - 50 feature map images (one for each kernel filter), each of size `62 * 62` since they are single channel (monochrome) and the image size has shrunk by a single border pixel due to how kernels scan the image
+- `conv2d (Conv2D)` - 50 higher-level feature map images (again, one for each kernel filter), each of size `60 * 60` since again they are monochrome and the image size has shrunk again by a single border pixel
+
+Crucially, for these convolution layers, remember it's the *kernels* that are trained, and *images* that are outputs passed to subsequent layers.
+
 :::: challenge
 ## Class exercise: Understanding the Model
 
@@ -363,19 +374,16 @@ Inspect the network above:
 
 * What do you think is the function of the `Flatten` layer?
 * Which layer has the most parameters? Do you find this intuitive?
-* (optional) This dataset is similar to the often used CIFAR-10 dataset.
-We can get inspiration for neural network architectures that could work on our dataset here: https://paperswithcode.com/sota/image-classification-on-cifar-10 . Pick a model and try to understand how it works.
 
 ::: solution
 ## Solution
 * The Flatten layer converts the 60x60x50 output of the convolutional layer into a single one-dimensional vector, that can be used as input for a dense layer.
-* The last dense layer has the most parameters. This layer connects every single output 'pixel' from the convolutional layer to the 10 output classes.
+* The last dense layer has the most parameters. This layer connects every single output 'pixel' from the previous convolutional layer to the 10 output classes.
 That results in a large number of connections, so a large number of parameters. This undermines a bit the expressiveness of the convolutional layers, that have much fewer parameters.
 :::
 ::::
 
-::: instructor
-## Demystifying the number of parameters in Conv2D layers
+### Demystifying the number of parameters in Conv2D layers
 
 The same explanation as illustrated in the exercise ["Number of model parameters"](#parameters-exercise-3)  holds in the current model. The general expression for the number of parameters in a Conv2D layer is as follows:
 
@@ -392,9 +400,8 @@ where,
 And thus for our present model,
 
 1. in the first Conv2D layer, the above expression computes to `(3 * 3 * 3 + 1) * 50 = 1400`, and
-2. in the second Conv2D layer, instead of number of channels, we have 50 filters in the previous Conv2D layer; and therefore the expression computes to `(3 * 3 * 50 + 1) * 50 = 22550`
-
-:::
+2. in the second Conv2D layer, instead of number of channels, we have 50 filters (each of size `3 * 3`) in the previous Conv2D layer;
+and therefore the expression computes to `(3 * 3 * 50 + 1) * 50 = 22550`
 
 ::: callout
 ## Search for existing architectures or pretrained models
