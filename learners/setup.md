@@ -77,7 +77,7 @@ Remember that you need to activate your environment every time you restart your 
 ### On Linux/macOs
 
 ```shell
-python3 -m pip install jupyter seaborn scikit-learn pandas tensorflow pydot
+python3 -m pip install jupyter seaborn scikit-learn pandas tensorflow
 ```
 
 Note for MacOS users: there is a package `tensorflow-metal` which accelerates the training of machine learning models with TensorFlow on a recent Mac with a Silicon chip (M1/M2/M3).
@@ -90,7 +90,7 @@ However, the installation is currently broken in the most recent version (as of 
 ### On Windows
 
 ```shell
-py -m pip install jupyter seaborn scikit-learn pandas tensorflow pydot
+python3 -m pip install jupyter seaborn scikit-learn pandas tensorflow
 ```
 
 :::
