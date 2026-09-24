@@ -953,7 +953,8 @@ This is called hyperparameter tuning.
 :::
 ::::
 
-### Hyperparameter tuning
+### (Optional Instructor Demo) Hyperparameter tuning
+
 ::: instructor
 ## Do a live demo instead of live coding
 You might want to demonstrate this section on hyperparameter tuning instead of doing live coding.
@@ -983,12 +984,41 @@ Now, let's find the best combination of hyperparameters using grid search.
 Grid search is the simplest hyperparameter tuning strategy,
 you test all the combinations of predefined values for the hyperparameters that you want to vary.
 
-For this we will make use of the package `keras_tuner`, we can install it by typing in the command line:
+We first need to ensure we have `keras_tuner` within our active virtual environment.
+
+:::::::::::::::::::::::::::::::::::::::::: callout
+
+## Can we install `keras_tuner` into an existing virtual environment?
+
+If wanted to use `keras_tuner` and it was not installed within our existing virtual environment,
+then doing a `pip install keras_tuner` in this situation would typically be what we'd do.
+
+However, given the number of packages we have installed, their particular versions, and their inherent complexity,
+depending on the platform and the packages installed to the environment,
+this can result in the `pip` package manager being unable to reconcile compatible versions of `keras_tuner` packages required
+with the versions of the packages you already have installed,
+which fails with an error.
+
+Thus, recreating the environment with all necessary packages gets around this potential issue.
+e.g. after closing the browser and shutting down jupyer lab:
+
 ```bash
-pip install keras_tuner
+deactivate
+python3 -m venv dl_workshop_tuner
+
+source venv dl_workshop_tuner/bin/activate  # For Linux or macOS
+source venv dl_workshop_tuner/Scripts/activate  # For Windows
+
+python3 -m pip install jupyter seaborn scikit-learn pandas tensorflow tensorboard keras_tuner
+jupyter lab
 ```
 
-Note that this can take some time to train (around 5 minutes or longer).
+Which should ensure that all packages are installed,
+since `pip` is able to reconcile all the compatible versions in one installation step.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+When this tuning process runs, note that this can take some time to train (around 5 minutes or longer).
 
 ```python
 import keras_tuner
