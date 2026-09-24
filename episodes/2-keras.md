@@ -808,10 +808,39 @@ Note that the outcome you have might be slightly different from what is shown in
 ## 9. Refine the model
 As we discussed before the design and training of a neural network comes with
 many hyperparameter and model architecture choices.
-We will go into more depth of these choices in later episodes.
-For now it is important to realize that the parameters we chose were
-somewhat arbitrary and more careful consideration needs to be taken to
-pick hyperparameter values. 
+
+
+:::: challenge
+## Explore the model!
+
+15 mins.
+
+The hyperparameters that were chosen when we build the model originally were somewhat arbitrary,
+and typically we'd take more careful consideration when selecting them. 
+
+We will go into more depth of hyperparameter choices in later episodes,
+but take some time to explore what happens if you change them.
+
+- Look at changing the number of neurons in the dense layer, and the number of epochs
+- Can you attain a more performant model?
+- Are your findings consistent when you change the random seed?
+
+::: solution
+
+Depending on what was changed,
+you will likely find that it's possible to attain what seems to be a more performant model,
+but that the findings will not remain consistent across different random seeds.
+If a model only performs well for one particular random seed,
+that is typically a warning sign that the result may not be robust
+and is highly sensitive to randomness.
+This suggests the dataset is small, the model is unstable,
+the train/test split is having a large effect, or the model is overfitting.
+
+There are other techniques we need to explore to improve our general approach,
+and we'll be looking at these in following episodes.
+
+:::
+::::
 
 
 ## 10. Share model
