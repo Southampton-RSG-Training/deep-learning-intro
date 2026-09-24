@@ -1,7 +1,7 @@
 ---
 title: "Advanced layer types"
-teaching: 70
-exercises: 70
+teaching: 80
+exercises: 60
 ---
 
 ::: questions
@@ -106,7 +106,9 @@ and stands for the three color channels **R**ed, **G**reen, **B**lue.
 
 :::: challenge
 
-### Number of features in Dollar Street 10
+### Class exercise: Number of features in Dollar Street 10
+
+5 mins.
 
 How many features does one image in the Dollar Street 10 dataset have?
 
@@ -180,7 +182,10 @@ This results in many connections, and thus many weights to be learned, in the ne
 Note that our input dimension is now quite high (even with small pictures of `64x64` pixels): we have 12288 features.
 
 :::: challenge
-## Number of parameters{#parameters-exercise-1}
+## Class exercise: Number of parameters{#parameters-exercise-1}
+
+5 mins.
+
 Suppose we create a single Dense (fully connected) layer with 100 hidden units that connect to the input pixels, how many parameters does this layer have?
 
 - A. 1228800
@@ -263,8 +268,11 @@ there that enable users to interactively play around with images and convolution
 :::
 
 :::: challenge
-## Border pixels
-What, do you think, happens to the border pixels when applying a convolution?
+## Class exercise: Border pixels
+
+5 mins.
+
+What do you think happens to the border pixels when applying a convolution?
 
 ::: solution
 ## Solution
@@ -280,7 +288,10 @@ in the context of applying a _Gaussian blur_.
 ::::
 
 :::: challenge
-## Number of model parameters{#parameters-exercise-3}
+## Class Exercise: Number of model parameters{#parameters-exercise-3}
+
+5 mins.
+
 Suppose we apply a convolutional layer with 100 kernels of size 3 * 3 * 3 (the last dimension applies to the rgb channels) to our images of 64 * 64 * 3 pixels. How many parameters do we have? Assume, for simplicity, that the kernels do not use bias terms. Compare this to the answer of the earlier exercise, ["Number of Parameters"](#parameters-exercise-1).
 
 ::: solution
@@ -343,26 +354,36 @@ Model: "dollar_street_model_small"
  Non-trainable params: 0 (0.00 B)
 ```
 
+### Understanding Conv2D layer outputs
+
+So taking our understanding of how Conv2D layers work, our model, and the summary above,
+the outputs from the first three layers are:
+
+- `input_layer_1 (InputLayer)` - our original size `64 * 64 * 3` images
+- `conv2d (Conv2D)` - 50 feature map images (one for each kernel filter), each of size `62 * 62` since they are single channel (monochrome) and the image size has shrunk by a single border pixel due to how kernels scan the image
+- `conv2d (Conv2D)` - 50 higher-level feature map images (again, one for each kernel filter), each of size `60 * 60` since again they are monochrome and the image size has shrunk again by a single border pixel
+
+Crucially, for these convolution layers, remember it's the *kernels* that are trained, and *images* that are outputs passed to subsequent layers.
+
 :::: challenge
-## Understanding the Model
+## Class exercise: Understanding the Model
+
+5 mins.
 
 Inspect the network above:
 
 * What do you think is the function of the `Flatten` layer?
 * Which layer has the most parameters? Do you find this intuitive?
-* (optional) This dataset is similar to the often used CIFAR-10 dataset.
-We can get inspiration for neural network architectures that could work on our dataset here: https://paperswithcode.com/sota/image-classification-on-cifar-10 . Pick a model and try to understand how it works.
 
 ::: solution
 ## Solution
 * The Flatten layer converts the 60x60x50 output of the convolutional layer into a single one-dimensional vector, that can be used as input for a dense layer.
-* The last dense layer has the most parameters. This layer connects every single output 'pixel' from the convolutional layer to the 10 output classes.
+* The last dense layer has the most parameters. This layer connects every single output 'pixel' from the previous convolutional layer to the 10 output classes.
 That results in a large number of connections, so a large number of parameters. This undermines a bit the expressiveness of the convolutional layers, that have much fewer parameters.
 :::
 ::::
 
-::: instructor
-## Demystifying the number of parameters in Conv2D layers
+### Demystifying the number of parameters in Conv2D layers
 
 The same explanation as illustrated in the exercise ["Number of model parameters"](#parameters-exercise-3)  holds in the current model. The general expression for the number of parameters in a Conv2D layer is as follows:
 
@@ -379,9 +400,8 @@ where,
 And thus for our present model,
 
 1. in the first Conv2D layer, the above expression computes to `(3 * 3 * 3 + 1) * 50 = 1400`, and
-2. in the second Conv2D layer, instead of number of channels, we have 50 filters in the previous Conv2D layer; and therefore the expression computes to `(3 * 3 * 50 + 1) * 50 = 22550`
-
-:::
+2. in the second Conv2D layer, instead of number of channels, we have 50 filters (each of size `3 * 3`) in the previous Conv2D layer;
+and therefore the expression computes to `(3 * 3 * 50 + 1) * 50 = 22550`
 
 ::: callout
 ## Search for existing architectures or pretrained models
@@ -625,7 +645,10 @@ This demonstrates that convolutional layers are a big improvement over dense lay
 
 :::: challenge
 ## Network depth
-What, do you think, will be the effect of adding a convolutional layer to your model? Will this model have more or fewer parameters?
+
+15 mins.
+
+What do you think will be the effect of adding a convolutional layer to your model? Will this model have more or fewer parameters?
 Try it out. Create a `model` that has an additional `Conv2d` layer with 50 filters and another MaxPooling2D layer after the last MaxPooling2D layer. Train it for 10 epochs and plot the results.
 
 **HINT**:
@@ -731,7 +754,10 @@ audio data for speech recognition, or 3d structures of chemical compounds.
 :::
 
 :::: challenge
-## Why and when to use convolutional neural networks
+## Class exercise: Why and when to use convolutional neural networks
+
+5 mins.
+
 1. Would it make sense to train a convolutional neural network (CNN) on the penguins dataset and why?
 2. Would it make sense to train a CNN on the weather dataset and why?
 3. (Optional) Can you think of a different machine learning task that would benefit from a
@@ -862,6 +888,9 @@ Now we see that the gap between the training accuracy and validation accuracy is
 
 :::: challenge
 ## Vary dropout rate
+
+10 mins.
+
 1. What do you think would happen if you lower the dropout rate? Try it out, and
   see how it affects the model training.
 2. You are varying the dropout rate and checking its effect on the model performance,
@@ -924,7 +953,8 @@ This is called hyperparameter tuning.
 :::
 ::::
 
-### Hyperparameter tuning
+### (Optional Instructor Demo) Hyperparameter tuning
+
 ::: instructor
 ## Do a live demo instead of live coding
 You might want to demonstrate this section on hyperparameter tuning instead of doing live coding.
@@ -954,12 +984,41 @@ Now, let's find the best combination of hyperparameters using grid search.
 Grid search is the simplest hyperparameter tuning strategy,
 you test all the combinations of predefined values for the hyperparameters that you want to vary.
 
-For this we will make use of the package `keras_tuner`, we can install it by typing in the command line:
+We first need to ensure we have `keras_tuner` within our active virtual environment.
+
+:::::::::::::::::::::::::::::::::::::::::: callout
+
+## Can we install `keras_tuner` into an existing virtual environment?
+
+If wanted to use `keras_tuner` and it was not installed within our existing virtual environment,
+then doing a `pip install keras_tuner` in this situation would typically be what we'd do.
+
+However, given the number of packages we have installed, their particular versions, and their inherent complexity,
+depending on the platform and the packages installed to the environment,
+this can result in the `pip` package manager being unable to reconcile compatible versions of `keras_tuner` packages required
+with the versions of the packages you already have installed,
+which fails with an error.
+
+Thus, recreating the environment with all necessary packages gets around this potential issue.
+e.g. after closing the browser and shutting down jupyer lab:
+
 ```bash
-pip install keras_tuner
+deactivate
+python3 -m venv dl_workshop_tuner
+
+source venv dl_workshop_tuner/bin/activate  # For Linux or macOS
+source venv dl_workshop_tuner/Scripts/activate  # For Windows
+
+python3 -m pip install jupyter seaborn scikit-learn pandas tensorflow tensorboard keras_tuner
+jupyter lab
 ```
 
-Note that this can take some time to train (around 5 minutes or longer).
+Which should ensure that all packages are installed,
+since `pip` is able to reconcile all the compatible versions in one installation step.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+When this tuning process runs, note that this can take some time to train (around 5 minutes or longer).
 
 ```python
 import keras_tuner
@@ -1037,7 +1096,9 @@ Score: 2.143627882003784
 
 :::: challenge
 
-## Hyperparameter tuning
+## Class exercise: Hyperparameter tuning
+
+5 mins.
 
 1: Looking at the grid search results, select all correct statements:
 
