@@ -1,7 +1,7 @@
 ---
 title: "Classification by a neural network using Keras"
-teaching: 60
-exercises: 50
+teaching: 80
+exercises: 30
 ---
 
 ::: questions
@@ -67,6 +67,12 @@ However, Keras will use your GPU automatically when it is available.
 Using a GPU becomes necessary when tackling larger datasets or complex problems which
 require a more complex neural network.
 :::
+
+::: instructor
+## Add workflow step description and number to notebook
+As you proceed through each of the workflow steps, add markdown cells at the start of each stage of the workflow to remind and demarcate where learners are in the overall process. e.g. "1. Formulate/outline the problem: penguin classification"
+:::
+
 
 ## 1. Formulate/outline the problem: penguin classification
 In this episode we will be using the [penguin dataset](https://zenodo.org/record/3960218). This is a dataset that was published in 2020 by Allison Horst and contains data on three different species of the penguins.
@@ -151,6 +157,8 @@ sns.pairplot(penguins, hue="species")
 :::: challenge
 
 ## Pairplot
+
+5 mins.
 
 Take a look at the pairplot we created. Consider the following questions:
 
@@ -248,7 +256,10 @@ target.head() # print out the top 5 to see what it looks like.
 ```
 
 :::: challenge
-## One-hot encoding
+## Class exercise: One-hot encoding
+
+5 mins.
+
 How many output neurons will our network have now that we one-hot encoded the target class?
 
 * A: 1
@@ -470,7 +481,9 @@ You could choose to show and discuss the resulting visualization to the learners
 
 
 :::: challenge
-## Changing the size of the model
+## Class exercise: Changing the size of the model
+
+5 mins.
 
 With the code snippets above, we defined a Keras model with 1 hidden layer with
 40 neurons and an output layer with 3 neurons.
@@ -584,7 +597,10 @@ This plot can be used to identify whether the training is well configured or whe
 are problems that need to be addressed.
 
 :::: challenge
-## The Training Curve
+## Class exercise: The Training Curve
+
+5 mins.
+
 Looking at the training curve we have just made.
 
 1. How does the training progress?
@@ -760,6 +776,9 @@ Here are more explanations of this confusion matrix and the classification model
 
 :::: challenge
 ## Confusion Matrix
+
+10 mins.
+
 Measure the performance of the neural network you trained and
 visualize a confusion matrix.
 
@@ -789,10 +808,40 @@ Note that the outcome you have might be slightly different from what is shown in
 ## 9. Refine the model
 As we discussed before the design and training of a neural network comes with
 many hyperparameter and model architecture choices.
-We will go into more depth of these choices in later episodes.
-For now it is important to realize that the parameters we chose were
-somewhat arbitrary and more careful consideration needs to be taken to
-pick hyperparameter values. 
+
+
+:::: challenge
+## Explore the model!
+
+15 mins.
+
+The hyperparameters that were chosen when we build the model originally were somewhat arbitrary,
+and typically we'd take more careful consideration when selecting them. 
+
+We will go into more depth of hyperparameter choices in later episodes,
+but take some time to explore what happens if you change them.
+
+- Experiment with changing the hyperparameters (e.g. the number of neurons in the dense layer, and the number of epochs),
+and perhaps adding a new `Dense` layer
+- Can you attain a more performant model?
+- Are your findings consistent when you change the random seed?
+
+::: solution
+
+Depending on what was changed,
+you will likely find that it's possible to attain what seems to be a more performant model,
+but that the findings will not remain consistent across different random seeds.
+If a model only performs well for one particular random seed,
+that is typically a warning sign that the result may not be robust
+and is highly sensitive to randomness.
+This suggests the dataset is small, the model is unstable,
+the train/test split is having a large effect, or the model is overfitting.
+
+There are other techniques we need to explore to improve our general approach,
+and we'll be looking at these in following episodes.
+
+:::
+::::
 
 
 ## 10. Share model
