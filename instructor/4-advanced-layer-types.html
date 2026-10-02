@@ -24,7 +24,10 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="lab-logo" alt="Carpentries Lab" src="../assets/images/lab-logo.svg"><abbr class="badge peer-reviewed" title="This lesson has passed peer review.">
+        <a href="index.html">
+        <img id="lab-logo" alt="Carpentries Lab" src="../assets/images/lab-logo.svg"></a>
+
+        <abbr class="badge peer-reviewed" title="This lesson has passed peer review.">
           <a href="https://doi.org/10.5281/zenodo.8308391" class="external-link alert-link">
             <i aria-hidden="true" class="icon" data-feather="user-check" style="border-radius: 5px"></i>
             DOI: 10.5281/zenodo.8308391
@@ -71,7 +74,9 @@
       <span class="menu-title">Menu</span>
     </button>
     <div class="nav-logo">
-      <img class="small-logo" alt="Carpentries Lab" src="../assets/images/lab-logo-sm.svg"></div>
+      <a href="index.html">
+      <img class="small-logo" alt="Carpentries Lab" src="../assets/images/lab-logo-sm.svg"></a>
+    </div>
     <div class="lesson-title-md">
       Introduction to Deep Learning in Python
     </div>
@@ -112,7 +117,7 @@
       </fieldset>
     </form>
     -->
-    <a id="search-button" class="btn btn-primary" href="../instructor/aio.html" role="button" aria-label="Search the All In One page">Search the All In One page</a>
+    <a id="search-button-nav" class="btn btn-primary" href="../instructor/aio.html" role="button" aria-label="Search the All In One page">Search the All In One page</a>
   </div><!--/div.container-fluid -->
 </nav><aside class="col-md-12 lesson-progress"><div class="progress lab">
     <div class="progress-bar lab" role="progressbar" style="width: 63%" aria-valuenow="63" aria-valuemin="0" aria-valuemax="100" aria-label="Lesson Progress">63%</div>
@@ -126,6 +131,9 @@
           <i class="search-icon" data-feather="x" role="img"></i>
         </button>
         <div class="sidebar-inner">
+          <div class="row mobile-row" id="theme-row-mobile">
+            <a id="search-button-sidebar" class="btn btn-primary" href="../instructor/aio.html" role="button" aria-label="Search the All In One page">Search the All In One page</a>
+          </div>
           <div class="row mobile-row" id="theme-row-mobile">
             <menu class="col theme-selector" id="theme-selector-sidebar"><li class="nav-item dropdown theme-button-list" id="theme-button-list-sidebar">
                 <button class="btn btn-link nav-link px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (auto)">
@@ -168,6 +176,7 @@
                     </div>
                   </div><!--/div.accordion-item-->
                 </div><!--/div.accordion-flush-->
+
               </div><!--div.sidenav-view-selector -->
             </div><!--/div.col -->
 
@@ -274,6 +283,29 @@ scratch</a></li>
               </div>
             </div>
 
+            <hr class="half-width"><div class="accordion accordion-flush" id="accordion-links-toggle">
+                <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-heading-links-toggle">
+                  <button class="accordion-button collapsed" id="links" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-links-toggle" aria-expanded="false" aria-controls="flush-collapse-links-toggle">
+                    LINKS
+                  </button>
+                </h2>
+                <div id="flush-collapse-links-toggle" class="accordion-collapse show collapse" data-bs-parent="#accordion-links-toggle">
+                    <div class="accordion-body">
+                        <ul><li>
+                            <a href="../instructor/key-points.html">Key Points</a>
+                            </li>
+                            <li>
+                            <a href="../instructor/instructor-notes.html">Instructor Notes</a>
+                            </li>
+                            <li>
+                            <a href="../instructor/images.html">Extract All Images</a>
+                            </li>
+                        </ul></div>
+                </div>
+                </div><!--/div.accordion-item-->
+            </div><!--/div.accordion-flush-->
+
             <hr class="half-width"><div class="accordion accordion-flush lesson-resources" id="accordion-resources-toggle">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-heading-resources-toggle">
@@ -283,16 +315,7 @@ scratch</a></li>
                 </h2>
                 <div id="flush-collapse-resources-toggle" class="accordion-collapse collapse" data-bs-parent="#accordion-resources-toggle">
                   <div class="accordion-body">
-                    <ul><li>
-                        <a href="../instructor/key-points.html">Key Points</a>
-                      </li>
-                      <li>
-                        <a href="../instructor/instructor-notes.html">Instructor Notes</a>
-                      </li>
-                      <li>
-                        <a href="../instructor/images.html">Extract All Images</a>
-                      </li>
-                      <li><a href="bonus-material.html">Bonus material</a></li><li><a href="design.html">Lesson design</a></li><li><a href="schedule.html">Example schedule</a></li><li><a href="survey-templates.html">Workshop survey templates</a></li><hr><li><a class="dropdown-item" href="reference.html">Reference</a></li>
+                    <ul><li><a href="bonus-material.html">Bonus material</a></li><li><a href="design.html">Lesson design</a></li><li><a href="schedule.html">Example schedule</a></li><li><a href="survey-templates.html">Workshop survey templates</a></li><hr><li><a class="dropdown-item" href="reference.html">Reference</a></li>
                     </ul></div>
                 </div>
               </div>
@@ -328,7 +351,7 @@ scratch</a></li>
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Advanced layer types</h1>
-        <p>Last updated on 2026-09-16 |
+        <p>Last updated on 2026-10-02 |
 
         <a href="https://github.com/Southampton-RSG-Training/deep-learning-intro/edit/main/episodes/4-advanced-layer-types.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -466,7 +489,7 @@ classes, this is the mapping of the categories:</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Framing the classification task </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>The sample images from the dataset, shown below, provide a good
 opportunity to lead a discussion with learners about the nature of the
@@ -508,14 +531,16 @@ in the dataset. The remainder of the shape, namely
 value 3 is typical for color images, and stands for the three color
 channels <strong>R</strong>ed, <strong>G</strong>reen,
 <strong>B</strong>lue.</p>
-<div id="number-of-features-in-dollar-street-10" class="callout challenge">
+<div id="class-exercise-number-of-features-in-dollar-street-10" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <span class="callout-header">Challenge</span>
-<div id="number-of-features-in-dollar-street-10" class="callout-inner">
-<h3 class="callout-title">Number of features in Dollar Street 10</h3>
+<div id="class-exercise-number-of-features-in-dollar-street-10" class="callout-inner">
+<h3 class="callout-title">Class exercise: Number of features in Dollar
+Street 10</h3>
 <div class="callout-content">
+<p>5 mins.</p>
 <p>How many features does one image in the Dollar Street 10 dataset
 have?</p>
 <ul><li>A. 64</li>
@@ -530,7 +555,7 @@ have?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The correct solution is C: 12288</p>
 <p>There are 4096 pixels in one image (64 * 64), each pixel has 3
@@ -616,8 +641,9 @@ features.</p>
 </div>
 <span class="callout-header">Challenge</span>
 <div id="parameters-exercise-1" class="callout-inner">
-<h3 class="callout-title">Number of parameters</h3>
+<h3 class="callout-title">Class exercise: Number of parameters</h3>
 <div class="callout-content">
+<p>5 mins.</p>
 <p>Suppose we create a single Dense (fully connected) layer with 100
 hidden units that connect to the input pixels, how many parameters does
 this layer have?</p>
@@ -633,7 +659,7 @@ this layer have?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>The correct answer is B: Each entry of the input dimensions, i.e. the
 <code>shape</code> of one single data point, is connected with 100
@@ -747,15 +773,16 @@ the different components of convolutional neural nets</li>
 </ul></div>
 </div>
 </div>
-<div id="border-pixels" class="callout challenge">
+<div id="class-exercise-border-pixels" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <span class="callout-header">Challenge</span>
-<div id="border-pixels" class="callout-inner">
-<h3 class="callout-title">Border pixels</h3>
+<div id="class-exercise-border-pixels" class="callout-inner">
+<h3 class="callout-title">Class exercise: Border pixels</h3>
 <div class="callout-content">
-<p>What, do you think, happens to the border pixels when applying a
+<p>5 mins.</p>
+<p>What do you think happens to the border pixels when applying a
 convolution?</p>
 </div>
 </div>
@@ -765,7 +792,7 @@ convolution?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>There are different ways of dealing with border pixels. You can
 ignore them, which means that your output image is slightly smaller then
@@ -787,8 +814,10 @@ of an image, in the context of applying a <em>Gaussian blur</em>.</p>
 </div>
 <span class="callout-header">Challenge</span>
 <div id="parameters-exercise-3" class="callout-inner">
-<h3 class="callout-title">Number of model parameters</h3>
+<h3 class="callout-title">Class Exercise: Number of model
+parameters</h3>
 <div class="callout-content">
+<p>5 mins.</p>
 <p>Suppose we apply a convolutional layer with 100 kernels of size 3 * 3
 * 3 (the last dimension applies to the rgb channels) to our images of 64
 * 64 * 3 pixels. How many parameters do we have? Assume, for simplicity,
@@ -803,7 +832,7 @@ Parameters”</a>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>We have 100 matrices with 3 * 3 * 3 = 27 values each so that gives 27
 * 100 = 2700 weights. This is a magnitude of 2000 less than the fully
@@ -883,23 +912,41 @@ the model’s predicted class.</li>
 
  Non-trainable params: 0 (0.00 B)</code></pre>
 </div>
-<div id="understanding-the-model" class="callout challenge">
+</div>
+<div class="section level3">
+<h3 id="understanding-conv2d-layer-outputs">Understanding Conv2D layer outputs<a class="anchor" aria-label="anchor" href="#understanding-conv2d-layer-outputs"></a></h3>
+<p>So taking our understanding of how Conv2D layers work, our model, and
+the summary above, the outputs from the first three layers are:</p>
+<ul><li>
+<code>input_layer_1 (InputLayer)</code> - our original size
+<code>64 * 64 * 3</code> images</li>
+<li>
+<code>conv2d (Conv2D)</code> - 50 feature map images (one for each
+kernel filter), each of size <code>62 * 62</code> since they are single
+channel (monochrome) and the image size has shrunk by a single border
+pixel due to how kernels scan the image</li>
+<li>
+<code>conv2d (Conv2D)</code> - 50 higher-level feature map images
+(again, one for each kernel filter), each of size <code>60 * 60</code>
+since again they are monochrome and the image size has shrunk again by a
+single border pixel</li>
+</ul><p>Crucially, for these convolution layers, remember it’s the
+<em>kernels</em> that are trained, and <em>images</em> that are outputs
+passed to subsequent layers.</p>
+<div id="class-exercise-understanding-the-model" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <span class="callout-header">Challenge</span>
-<div id="understanding-the-model" class="callout-inner">
-<h3 class="callout-title">Understanding the Model</h3>
+<div id="class-exercise-understanding-the-model" class="callout-inner">
+<h3 class="callout-title">Class exercise: Understanding the Model</h3>
 <div class="callout-content">
+<p>5 mins.</p>
 <p>Inspect the network above:</p>
 <ul><li>What do you think is the function of the <code>Flatten</code>
 layer?</li>
 <li>Which layer has the most parameters? Do you find this
 intuitive?</li>
-<li>(optional) This dataset is similar to the often used CIFAR-10
-dataset. We can get inspiration for neural network architectures that
-could work on our dataset here: <a href="https://paperswithcode.com/sota/image-classification-on-cifar-10" class="external-link uri">https://paperswithcode.com/sota/image-classification-on-cifar-10</a>
-. Pick a model and try to understand how it works.</li>
 </ul></div>
 </div>
 </div>
@@ -908,27 +955,23 @@ could work on our dataset here: <a href="https://paperswithcode.com/sota/image-c
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <ul><li>The Flatten layer converts the 60x60x50 output of the convolutional
 layer into a single one-dimensional vector, that can be used as input
 for a dense layer.</li>
 <li>The last dense layer has the most parameters. This layer connects
-every single output ‘pixel’ from the convolutional layer to the 10
-output classes. That results in a large number of connections, so a
+every single output ‘pixel’ from the previous convolutional layer to the
+10 output classes. That results in a large number of connections, so a
 large number of parameters. This undermines a bit the expressiveness of
 the convolutional layers, that have much fewer parameters.</li>
 </ul></div>
 </div>
 </div>
 </div>
-<div id="accordionInstructor2" class="accordion instructor-note accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
-  <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Demystifying the number of parameters in Conv2D layers </h3>
-</button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
-<div class="accordion-body">
+</div>
+<div class="section level3">
+<h3 id="demystifying-the-number-of-parameters-in-conv2d-layers">Demystifying the number of parameters in Conv2D layers<a class="anchor" aria-label="anchor" href="#demystifying-the-number-of-parameters-in-conv2d-layers"></a></h3>
 <p>The same explanation as illustrated in the exercise <a href="#parameters-exercise-3">“Number of model parameters”</a> holds in
 the current model. The general expression for the number of parameters
 in a Conv2D layer is as follows:</p>
@@ -954,14 +997,11 @@ number of filters in a Conv2D layer</li>
 <ol style="list-style-type: decimal"><li>in the first Conv2D layer, the above expression computes to
 <code>(3 * 3 * 3 + 1) * 50 = 1400</code>, and</li>
 <li>in the second Conv2D layer, instead of number of channels, we have
-50 filters in the previous Conv2D layer; and therefore the expression
-computes to <code>(3 * 3 * 50 + 1) * 50 = 22550</code>
+50 filters (each of size <code>3 * 3</code>) in the previous Conv2D
+layer; and therefore the expression computes to
+<code>(3 * 3 * 50 + 1) * 50 = 22550</code>
 </li>
-</ol></div>
-</div>
-</div>
-</div>
-<div id="search-for-existing-architectures-or-pretrained-models" class="callout">
+</ol><div id="search-for-existing-architectures-or-pretrained-models" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
@@ -984,12 +1024,12 @@ teach you is by developing a neural network from scratch!</p>
 </div>
 </div>
 </div>
-<div id="accordionInstructor3" class="accordion instructor-note accordion-flush">
+<div id="accordionInstructor2" class="accordion instructor-note accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor3" aria-expanded="false" aria-controls="collapseInstructor3">
-  <h3 class="accordion-header" id="headingInstructor3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Demonstrate searching for existing architectures </h3>
+<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
+  <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Demonstrate searching for existing architectures </h3>
 </button>
-<div id="collapseInstructor3" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor3" aria-labelledby="headingInstructor3">
+<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
 <div class="accordion-body">
 <p>At this point it can be nice to apply above callout box and
 demonstrate searching for state-of-the-art implementations. If you
@@ -1127,12 +1167,12 @@ suitable for different tasks and datasets.</p>
 </div>
 </div>
 </div>
-<div id="accordionInstructor4" class="accordion instructor-note accordion-flush">
+<div id="accordionInstructor3" class="accordion instructor-note accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor4" aria-expanded="false" aria-controls="collapseInstructor4">
-  <h3 class="accordion-header" id="headingInstructor4">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> BREAK </h3>
+<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor3" aria-expanded="false" aria-controls="collapseInstructor3">
+  <h3 class="accordion-header" id="headingInstructor3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> BREAK </h3>
 </button>
-<div id="collapseInstructor4" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor4" aria-labelledby="headingInstructor4">
+<div id="collapseInstructor3" class="accordion-collapse collapse" aria-labelledby="headingInstructor3" data-bs-parent="#accordionInstructor3">
 <div class="accordion-body">
 <p>This is a good time for switching instructor and/or a break.</p>
 </div>
@@ -1186,12 +1226,12 @@ compare them to the ground truth.</p>
 accuracy increases, while the validation accuracy stagnates. Meanwhile,
 the training loss keeps decreasing while the validation loss actually
 starts increasing after a few epochs.</p>
-<div id="accordionInstructor5" class="accordion instructor-note accordion-flush">
+<div id="accordionInstructor4" class="accordion instructor-note accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor5" aria-expanded="false" aria-controls="collapseInstructor5">
-  <h3 class="accordion-header" id="headingInstructor5">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Comparison with a network with only dense layers </h3>
+<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor4" aria-expanded="false" aria-controls="collapseInstructor4">
+  <h3 class="accordion-header" id="headingInstructor4">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Comparison with a network with only dense layers </h3>
 </button>
-<div id="collapseInstructor5" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor5" aria-labelledby="headingInstructor5">
+<div id="collapseInstructor4" class="accordion-collapse collapse" aria-labelledby="headingInstructor4" data-bs-parent="#accordionInstructor4">
 <div class="accordion-body">
 <p>The callout box below compares the CNN approach with a network with
 only dense layers. Depending on time, the following discussion can be
@@ -1287,9 +1327,10 @@ over dense layers for these kind of datasets.</p>
 <div id="network-depth" class="callout-inner">
 <h3 class="callout-title">Network depth</h3>
 <div class="callout-content">
-<p>What, do you think, will be the effect of adding a convolutional
-layer to your model? Will this model have more or fewer parameters? Try
-it out. Create a <code>model</code> that has an additional
+<p>15 mins.</p>
+<p>What do you think will be the effect of adding a convolutional layer
+to your model? Will this model have more or fewer parameters? Try it
+out. Create a <code>model</code> that has an additional
 <code>Conv2d</code> layer with 50 filters and another MaxPooling2D layer
 after the last MaxPooling2D layer. Train it for 10 epochs and plot the
 results.</p>
@@ -1316,7 +1357,7 @@ needs to be adjusted as follows:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
   <h4 class="accordion-header" id="headingSolution6"> Show me the solution </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
 <div class="accordion-body">
 <p>We add an extra Conv2D layer after the second pooling layer:</p>
 <div class="codewrapper sourceCode" id="cb28">
@@ -1417,15 +1458,16 @@ recognition, or 3d structures of chemical compounds.</p>
 </div>
 </div>
 </div>
-<div id="why-and-when-to-use-convolutional-neural-networks" class="callout challenge">
+<div id="class-exercise-why-and-when-to-use-convolutional-neural-networks" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <span class="callout-header">Challenge</span>
-<div id="why-and-when-to-use-convolutional-neural-networks" class="callout-inner">
-<h3 class="callout-title">Why and when to use convolutional neural
-networks</h3>
+<div id="class-exercise-why-and-when-to-use-convolutional-neural-networks" class="callout-inner">
+<h3 class="callout-title">Class exercise: Why and when to use
+convolutional neural networks</h3>
 <div class="callout-content">
+<p>5 mins.</p>
 <ol style="list-style-type: decimal"><li>Would it make sense to train a convolutional neural network (CNN) on
 the penguins dataset and why?</li>
 <li>Would it make sense to train a CNN on the weather dataset and
@@ -1440,7 +1482,7 @@ would benefit from a CNN architecture?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution7" aria-expanded="false" aria-controls="collapseSolution7">
   <h4 class="accordion-header" id="headingSolution7"> Show me the solution </h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>No that would not make sense. Convolutions only work when the
 features of the data can be ordered in a meaningful way. Pixels for
@@ -1592,6 +1634,7 @@ set is higher than without dropout.</p>
 <div id="vary-dropout-rate" class="callout-inner">
 <h3 class="callout-title">Vary dropout rate</h3>
 <div class="callout-content">
+<p>10 mins.</p>
 <ol style="list-style-type: decimal"><li>What do you think would happen if you lower the dropout rate? Try it
 out, and see how it affects the model training.</li>
 <li>You are varying the dropout rate and checking its effect on the
@@ -1604,7 +1647,7 @@ model performance, what is the term associated to this procedure?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution8" aria-expanded="false" aria-controls="collapseSolution8">
   <h4 class="accordion-header" id="headingSolution8"> Show me the solution </h4>
 </button>
-<div id="collapseSolution8" class="accordion-collapse collapse" data-bs-parent="#accordionSolution8" aria-labelledby="headingSolution8">
+<div id="collapseSolution8" class="accordion-collapse collapse" aria-labelledby="headingSolution8" data-bs-parent="#accordionSolution8">
 <div class="accordion-body">
 <div class="section level3">
 <h3 id="varying-the-dropout-rate">1. Varying the dropout rate<a class="anchor" aria-label="anchor" href="#varying-the-dropout-rate"></a></h3>
@@ -1664,13 +1707,13 @@ in this case is around 0.9. This is where the val loss is lowest.</p>
 </div>
 </div>
 <div class="section level3">
-<h3 id="hyperparameter-tuning">Hyperparameter tuning<a class="anchor" aria-label="anchor" href="#hyperparameter-tuning"></a></h3>
-<div id="accordionInstructor6" class="accordion instructor-note accordion-flush">
+<h3 id="optional-instructor-demo-hyperparameter-tuning">(Optional Instructor Demo) Hyperparameter tuning<a class="anchor" aria-label="anchor" href="#optional-instructor-demo-hyperparameter-tuning"></a></h3>
+<div id="accordionInstructor5" class="accordion instructor-note accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor6" aria-expanded="false" aria-controls="collapseInstructor6">
-  <h3 class="accordion-header" id="headingInstructor6">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Do a live demo instead of live coding </h3>
+<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor5" aria-expanded="false" aria-controls="collapseInstructor5">
+  <h3 class="accordion-header" id="headingInstructor5">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Do a live demo instead of live coding </h3>
 </button>
-<div id="collapseInstructor6" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor6" aria-labelledby="headingInstructor6">
+<div id="collapseInstructor5" class="accordion-collapse collapse" aria-labelledby="headingInstructor5" data-bs-parent="#accordionInstructor5">
 <div class="accordion-body">
 <p>You might want to demonstrate this section on hyperparameter tuning
 instead of doing live coding. The goal is to show that hyperparameter
@@ -1713,15 +1756,51 @@ hyperparameters, namely the dropout rate and the number of layers:</p>
 search. Grid search is the simplest hyperparameter tuning strategy, you
 test all the combinations of predefined values for the hyperparameters
 that you want to vary.</p>
-<p>For this we will make use of the package <code>keras_tuner</code>, we
-can install it by typing in the command line:</p>
+<p>We first need to ensure we have <code>keras_tuner</code> within our
+active virtual environment.</p>
+<div id="can-we-install-keras_tuner-into-an-existing-virtual-environment" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="can-we-install-keras_tuner-into-an-existing-virtual-environment" class="callout-inner">
+<h3 class="callout-title">Can we install <code>keras_tuner</code> into
+an existing virtual environment?</h3>
+<div class="callout-content">
+<p>If wanted to use <code>keras_tuner</code> and it was not installed
+within our existing virtual environment, then doing a
+<code>pip install keras_tuner</code> in this situation would typically
+be what we’d do.</p>
+<p>However, given the number of packages we have installed, their
+particular versions, and their inherent complexity, depending on the
+platform and the packages installed to the environment, this can result
+in the <code>pip</code> package manager being unable to reconcile
+compatible versions of <code>keras_tuner</code> packages required with
+the versions of the packages you already have installed, which fails
+with an error.</p>
+<p>Thus, recreating the environment with all necessary packages gets
+around this potential issue. e.g. after closing the browser and shutting
+down jupyer lab:</p>
 <div class="codewrapper sourceCode" id="cb38">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" tabindex="-1" aria-label="code-block-38-1"></a><span class="ex">pip</span> install keras_tuner</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" tabindex="-1" aria-label="code-block-38-1"></a><span class="ex">deactivate</span></span>
+<span id="cb38-2"><a href="#cb38-2" tabindex="-1" aria-label="code-block-38-2"></a><span class="ex">python3</span> <span class="at">-m</span> venv dl_workshop_tuner</span>
+<span id="cb38-3"><a href="#cb38-3" tabindex="-1" aria-label="code-block-38-3"></a></span>
+<span id="cb38-4"><a href="#cb38-4" tabindex="-1" aria-label="code-block-38-4"></a><span class="bu">source</span> venv dl_workshop_tuner/bin/activate  <span class="co"># For Linux or macOS</span></span>
+<span id="cb38-5"><a href="#cb38-5" tabindex="-1" aria-label="code-block-38-5"></a><span class="bu">source</span> venv dl_workshop_tuner/Scripts/activate  <span class="co"># For Windows</span></span>
+<span id="cb38-6"><a href="#cb38-6" tabindex="-1" aria-label="code-block-38-6"></a></span>
+<span id="cb38-7"><a href="#cb38-7" tabindex="-1" aria-label="code-block-38-7"></a><span class="ex">python3</span> <span class="at">-m</span> pip install jupyter seaborn scikit-learn pandas tensorflow tensorboard keras_tuner</span>
+<span id="cb38-8"><a href="#cb38-8" tabindex="-1" aria-label="code-block-38-8"></a><span class="ex">jupyter</span> lab</span></code></pre>
 </div>
-<p>Note that this can take some time to train (around 5 minutes or
-longer).</p>
+<p>Which should ensure that all packages are installed, since
+<code>pip</code> is able to reconcile all the compatible versions in one
+installation step.</p>
+</div>
+</div>
+</div>
+<p>When this tuning process runs, note that this can take some time to
+train (around 5 minutes or longer).</p>
 <div class="codewrapper sourceCode" id="cb39">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1802,14 +1881,15 @@ n_layers: 2
 dropout_rate: 0.5
 Score: 2.143627882003784</code></pre>
 </div>
-<div id="hyperparameter-tuning-1" class="callout challenge">
+<div id="class-exercise-hyperparameter-tuning" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <span class="callout-header">Challenge</span>
-<div id="hyperparameter-tuning-1" class="callout-inner">
-<h3 class="callout-title">Hyperparameter tuning</h3>
+<div id="class-exercise-hyperparameter-tuning" class="callout-inner">
+<h3 class="callout-title">Class exercise: Hyperparameter tuning</h3>
 <div class="callout-content">
+<p>5 mins.</p>
 <p>1: Looking at the grid search results, select all correct
 statements:</p>
 <ul><li>A. 6 different models were trained in this grid search run, because
@@ -1840,7 +1920,7 @@ hyperparameters from a predefined set of possible values.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution9" aria-expanded="false" aria-controls="collapseSolution9">
   <h4 class="accordion-header" id="headingSolution9"> Show me the solution </h4>
 </button>
-<div id="collapseSolution9" class="accordion-collapse collapse" data-bs-parent="#accordionSolution9" aria-labelledby="headingSolution9">
+<div id="collapseSolution9" class="accordion-collapse collapse" aria-labelledby="headingSolution9" data-bs-parent="#accordionSolution9">
 <div class="accordion-body">
 <p>1:</p>
 <ul><li>A: Correct, 2 values for number of layers (1 and 2) are combined
@@ -2026,7 +2106,7 @@ any links that you are not going to use.
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.21.0" class="external-link">sandpaper (0.21.0)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.1.2" class="external-link">varnish (1.1.2)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.21.1" class="external-link">sandpaper (0.21.1)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.1.3" class="external-link">varnish (1.1.3)</a></p>
 		</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -2048,8 +2128,8 @@ any links that you are not going to use.
   "url": "https://Southampton-RSG-Training.github.io/deep-learning-intro/instructor/4-advanced-layer-types.html",
   "identifier": "https://Southampton-RSG-Training.github.io/deep-learning-intro/instructor/4-advanced-layer-types.html",
   "dateCreated": "2020-10-17",
-  "dateModified": "2026-09-16",
-  "datePublished": "2026-09-29"
+  "dateModified": "2026-10-02",
+  "datePublished": "2026-10-02"
 }
 
   </script><script>
